@@ -1,0 +1,22 @@
+{
+  "name": "parking-lot-nodejs",
+  "version": "1.0.0",
+  "description": "Parking Lot using nodejs as backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herux/parking-lot-nodejs.git"
+  },
+  "keywords": [
+    "parkinglot"
+  ],
+  "author": "heru susanto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/herux/parking-lot-nodejs/issues"
+  },
+  "homepage": "https://github.com/herux/parking-lot-nodejs#readme"
+}
