@@ -1,2 +1,2 @@
 # parking-lot-nodejs
-Parking Lot using 
+Parking Lot using nodejs as backend 
