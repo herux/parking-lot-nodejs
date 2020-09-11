@@ -5,11 +5,19 @@ class Result {
         this.data = data;
     }
 
+    set statusCode(code) {
+        this._statusCode = code;
+    }
+
+    get statusCode() {
+        return this._statusCode;
+    }
+
     response() {
         if (this.isSuccess) {
-            return {r: true, message: this.message, data: this.data}
+            return {r: true, m: this.message, d: this.data}
         } else {
-            return {r: false, message: this.message}
+            return {r: false, m: this.message}
         }
     }
 }

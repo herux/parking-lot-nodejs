@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const parkACar = require('../controllers/ParkingLot.controller').parkACar;
-const leavePark = require('../controllers/ParkingLot.controller').leavePark;
+const ParkingLotCtrl = require('../controllers/ParkingLot.controller');
 
-router.post('/park_a_car', parkACar);
-router.post('/leave_park', leavePark);
+router.post('/park_a_car', ParkingLotCtrl.parkACar);
+router.post('/leave_park', ParkingLotCtrl.leavePark);
 
 module.exports = router;

@@ -7,9 +7,10 @@ app.use(express.json());
 app.use('/apis', plRoute);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) { 
-    res.status(404).json(
-        new Result(false, 'endpoint not found')
-        .response()
+    let result = new Result(false, 'endpoint not found');
+    result.statusCode = 404;
+    res.status(result.statusCode).json(
+        result.response()
     );
   });
 
