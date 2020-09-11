@@ -44,7 +44,14 @@ let unParkCar = (req, res) => {
 }
 
 let parkInfo = (req, res) => {
-
+    const plateNumber = req.query.plateNumber;
+    console.log(plateNumber);
+    if (!plateNumber) {
+        result = new Result(false, 'view parking lot info using at least plateNumber');
+        result.statusCode = 404;
+        return res.status(result.statusCode).json(result.response());
+    }
+    let slot = parkingLot.findCar(plateNumber);
 }
 
 module.exports = {
