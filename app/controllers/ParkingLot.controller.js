@@ -11,19 +11,36 @@ let parkACar = (req, res) => {
         result.statusCode = 404;
         return res.status(result.statusCode).json(result.response());
     }
-    let slot = parkingLot.parkACar(req.body.plateNumber, req.body.carColor);
-    if (slot) {
-        result = new Result(true, 'success', slot);
-        result.statusCode = 200;
-    }else{
-        result = new Result(false, 'parking lot is full');
-        result.statusCode = 404;
-    }
-    res.status(result.statusCode).json(result.response());
+    parkingLot.parkACar(req.body.plateNumber, req.body.carColor, function(slot, message){
+        if (slot) {
+            result = new Result(true, message, slot);
+            result.statusCode = 200;
+        }else{
+            result = new Result(false, message);
+            result.statusCode = 404;
+        }
+        res.status(result.statusCode).json(result.response());
+    });
 }
 
-let leavePark = (req, res) => {
-    
+let unParkCar = (req, res) => {
+    if (!req.body.plateNumber) {
+        result = new Result(false, 'unpark car need plateNumber for input');
+        result.statusCode = 404;
+        return res.status(result.statusCode).json(result.response());
+    }
+
+    let result = null;
+    parkingLot.unParkCar(req.body.plateNumber, function(slot, message){
+        if (slot) {
+            result = new Result(true, message, slot);
+            result.statusCode = 200;
+        }else{
+            result = new Result(false, message);
+            result.statusCode = 404;
+        }
+        res.status(result.statusCode).json(result.response());
+    });
 }
 
 let parkInfo = (req, res) => {
@@ -32,5 +49,6 @@ let parkInfo = (req, res) => {
 
 module.exports = {
     parkACar: parkACar,
-    leavePark: leavePark
+    unParkCar: unParkCar,
+    parkInfo: parkInfo
 }

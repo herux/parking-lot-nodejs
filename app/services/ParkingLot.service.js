@@ -14,24 +14,46 @@ class ParkingLot {
         // console.log('parkingLot: ', this.park);
     }
 
-    leavePark(num) {
-        let slot = this.park.slots[num]; 
-        slot.plateNumber = null;
-        slot.carColor = null;
+    unParkCar(plateNumber, callback) {
+        let slot = this.findCar(plateNumber);
+        if (slot) {
+            slot.plateNumber = null;
+            slot.carColor = null;
+            return callback(slot, 'getting out of the parking lot was success');
+        }else{
+            return callback(null, 'plateNumber not found in the parking lot');
+        }
     }
 
-    parkACar(plateNumber, carColor) {
+    findCar(plateNumber) {
         for (let i = 0; i < this.park.slots.length; i++) {
             const slot = this.park.slots[i];
-            console.log('park: ', slot);
-            if (!slot.plateNumber) {
-                slot.plateNumber = plateNumber;
-                slot.carColor = carColor;
+            if (slot.plateNumber == plateNumber) {
+                slot.slotNumber = i + 1;
                 return slot;
             }
         }
         return null;
+    }
+
+    parkACar(plateNumber, carColor, callback) {
+        let slot = this.findCar(plateNumber);
+        if (!slot) {
+            for (let i = 0; i < this.park.slots.length; i++) {
+                slot = this.park.slots[i];
+                if (!slot.plateNumber) {
+                    slot.plateNumber = plateNumber;
+                    slot.carColor = carColor;
+                    slot.slotNumber = i + 1;
+                    return callback(slot, 'success');
+                }
+            }
+            return callback(null, 'parking lot is full');
+        }else{
+            return callback(slot, 'plateNumber is detected parking');
+        }
     } 
+
 }
 
 module.exports = ParkingLot;
