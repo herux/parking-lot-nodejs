@@ -36,6 +36,15 @@ class ParkingLot {
         return null;
     }
 
+    findCarBySlotNumber(num, callback) {
+        let slot = this.park.slots[num - 1];
+        if (slot.plateNumber) {
+            return callback(slot, 'Success');
+        }else{
+            return callback(slot, 'Not found');
+        }
+    }
+
     parkACar(plateNumber, carColor, callback) {
         let slot = this.findCar(plateNumber);
         if (!slot) {
