@@ -1,8 +1,10 @@
 const ParkingLot = require('../services/ParkingLot.service');
 const Result = require('../models/Result');
 
+const PARK_COUNT = process.env.PARK_COUNT || 10;
+
 let parkingLot = new ParkingLot();
-parkingLot.createPark(10);
+parkingLot.createPark(PARK_COUNT);
 
 let parkACar = (req, res) => {
     let result = null;
